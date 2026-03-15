@@ -38,14 +38,14 @@ function Auctions() {
         
         // if no category selected bring everything
         if (Object.keys(selectedCategory).length <=0 ){
-            axios.get(`https://localhost:33123/items`).then((res)=>{
+            axios.get(`http://localhost:33123/items`).then((res)=>{
                 setItemList(res.data);
                 setComplete(true);
             });
         }
         else{
 
-            axios.get(`https://localhost:33123/items/categories/${selectedCategory.id}`).then((res)=>{
+            axios.get(`http://localhost:33123/items/categories/${selectedCategory.id}`).then((res)=>{
                 setItemList(res.data);
                 setComplete(true);
             });
@@ -85,11 +85,15 @@ function Auctions() {
   return (
     <> 
     
+      <div>
+      
+      <div style={{ paddingTop: '50px' }}>
       {  Object.keys(selectedCategory).length > 0  ?
-        <Title title={selectedCategory.name} />
+        <Typography variant="h2" style={{ textAlign: 'center', fontFamily: 'Inter, sans-serif', fontWeight: '900', background: "-webkit-linear-gradient(45deg, #00C9FF 0%, #92FE9D 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: '20px' }}>{selectedCategory.name}</Typography>
         :
-        <Title title={"Shop by Category"} />
+        <Typography variant="h2" style={{ textAlign: 'center', fontFamily: 'Inter, sans-serif', fontWeight: '900', background: "-webkit-linear-gradient(45deg, #FF6B6B 0%, #4E65FF 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: '20px' }}>Shop by Category</Typography>
       }
+      </div>
         
       <div className="search">
         <div className="container" style={{
@@ -109,18 +113,15 @@ function Auctions() {
         <div className="search">
 
           { itemList.length===0 && complete &&
-            <>
-            <div className='container' style={{
-              marginTop: 20,
-            }}>
-            
-              <Typography sx={{fontFamily: 'Futura'}} variant="h4">
-                              no auctions found
-                      </Typography>
-                      </div>
-              <img src='https://indususedcars.com/assets/theme/images/no_result_found.png' alt="coverphoto" />
-              <Header text={`Unfortunately there are no current listings for ${selectedCategory.name}`} />
-              </>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '50vh', padding: '40px' }}>
+              <Typography sx={{fontFamily: 'Inter, sans-serif', fontWeight: '900', letterSpacing: '1px', textTransform: 'uppercase'}} variant="h4">
+                No auctions found
+              </Typography>
+              <img style={{ width: '450px', borderRadius: '24px', margin: '30px 0', border: '1px solid rgba(255,255,255,0.1)', boxShadow: '0 20px 50px rgba(0,0,0,0.8), 0 0 20px rgba(0, 201, 255, 0.4)' }} src='http://localhost:33123/images/empty_auctions.png' alt="no auctions found" />
+              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.25rem', fontFamily: 'Inter, sans-serif', textAlign: 'center', maxWidth: '600px', lineHeight: '1.6' }}>
+                Unfortunately, there are no current listings {Object.keys(selectedCategory).length > 0 ? `for ${selectedCategory.name}` : 'available right now'}. Please check back later or explore other categories!
+              </div>
+            </div>
           }
 
           { itemList.length===0 && !complete &&
@@ -183,8 +184,8 @@ function Auctions() {
           </div>)
         }
         </div>
-    </div>
-
+      </div>
+     </div>
     </>
   )
 }

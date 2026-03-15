@@ -47,7 +47,7 @@ function FilterCategories() {
         
         // if no category selected bring everything
         if (Object.keys(selectedCategory).length <=0 ){
-            axios.get(`https://localhost:33123/items`).then((res)=>{
+            axios.get(`http://localhost:33123/items`).then((res)=>{
                 for (var i=0;i< res.data.length ; i++){
                     if(res.data[i].currently>superMax){
                         setSuperMax(res.data[i].currently);
@@ -65,7 +65,7 @@ function FilterCategories() {
             setLocation("");
             setCountry("");
             setPriceRange([0, superMax]);
-            axios.get(`https://localhost:33123/items/categories/${selectedCategory.id}`).then((res)=>{
+            axios.get(`http://localhost:33123/items/categories/${selectedCategory.id}`).then((res)=>{
                 setItemList(res.data);
                 setFinalList(res.data);
                 setComplete(true);

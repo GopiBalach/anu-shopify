@@ -34,7 +34,7 @@ function Registration() {
     let navigate = useNavigate();
     const [coordinates, setCoordinates] = useState({});
     const [holdData, setHoldData] = useState({});
-    const [mycountry, setCountry] = useState([]);
+    const [mycountry, setCountry] = useState("Greece");
 
     const initialValues = {
         username: "",
@@ -56,7 +56,7 @@ function Registration() {
         username: Yup.string().min(3).max(20).required("You must input a username").test('Unique Username', 'Username already exists',
             function (value) {
                 return new Promise((resolve, reject) => {
-                    axios.get(`https://localhost:33123/auth/exists/${value}`)
+                    axios.get(`http://localhost:33123/auth/exists/${value}`)
                         .then((res) => {
                             console.log(res);
                             if(res.data.exists===true){
@@ -118,7 +118,7 @@ function Registration() {
             holdData.latitudeLongitude = point;
         }
 
-        axios.post("https://localhost:33123/auth/", holdData).then((res)=>{
+        axios.post("http://localhost:33123/auth/", holdData).then((res)=>{
         });
 
         setOpen(true);
@@ -273,3 +273,4 @@ function Registration() {
 }
 
 export default Registration;
+

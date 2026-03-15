@@ -36,7 +36,7 @@ export default function Export() {
         }
       }
 
-      axios.get("https://localhost:33123/items/admin/", head).then((res)=>{
+      axios.get("http://localhost:33123/items/admin/", head).then((res)=>{
         setItemList(res.data);
       });
 
@@ -45,7 +45,7 @@ export default function Export() {
   return (
 
     <div style = {{ minHeight: '90vh', width: '100%', backgroundRepeat: 'repeat',
-                    backgroundImage: `url("https://localhost:33123/images/background.png")`,
+                    backgroundImage: `url("http://localhost:33123/images/background.png")`,
     }}>
     
       {/* Firstly the page headers */}
@@ -83,3 +83,4 @@ export default function Export() {
 
   );
 }
+

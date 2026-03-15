@@ -37,7 +37,7 @@ export default function MailChats() {
       }
     }
     
-    axios.get(`https://localhost:33123/mail/seller/${authState.id}`, head).then((res)=>{
+    axios.get(`http://localhost:33123/mail/seller/${authState.id}`, head).then((res)=>{
       setMailList(res.data);
     });
 
@@ -58,7 +58,7 @@ export default function MailChats() {
       }
     }
     
-    axios.get(`https://localhost:33123/mail/seller/chat/${authState.id}`, head).then((res)=>{
+    axios.get(`http://localhost:33123/mail/seller/chat/${authState.id}`, head).then((res)=>{
         setChatDisplayed(res.data);
     });
     setClicked(true);
@@ -222,3 +222,4 @@ export default function MailChats() {
     </>
   );
 }
+

@@ -35,7 +35,7 @@ function CreateCategory() {
               }
           }
 
-          axios.post("https://localhost:33123/categories", body, head).then((res)=>{
+          axios.post("http://localhost:33123/categories", body, head).then((res)=>{
               if (res.data.error){
                   setErrorMessage(res.data.error)
                   handleClickAlertError();
@@ -78,7 +78,7 @@ function CreateCategory() {
   return (
 
     <div style={{ minHeight: '90vh', width: '100%', 
-                  backgroundImage: `url("https://localhost:33123/images/background.png")`,
+                  backgroundImage: `url("http://localhost:33123/images/background.png")`,
                   backgroundRepeat: 'repeat',
                 }}>
       <div className='createItemPage'>
@@ -140,3 +140,4 @@ function CreateCategory() {
 }
 
 export default CreateCategory;
+

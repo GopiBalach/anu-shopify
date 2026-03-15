@@ -140,14 +140,14 @@ function Item() {
             }
         }
 
-        axios.post(`https://localhost:33123/bids/`, holdBidData, head).then((res)=>{
+        axios.post(`http://localhost:33123/bids/`, holdBidData, head).then((res)=>{
         });
 
         // Also inform their history
         const body2 = {     
             userId: authState.id,
         };
-        axios.post(`https://localhost:33123/history/bid/${itemObject.id}`, body2, head).then((reshi)=>{
+        axios.post(`http://localhost:33123/history/bid/${itemObject.id}`, body2, head).then((reshi)=>{
         });
 
         // and update the ui
@@ -199,14 +199,14 @@ function Item() {
                 }
             }
             // update the item as purchased
-            axios.put(`https://localhost:33123/items/purchase/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/purchase/${itemObject.id}`, body, head).then((res)=>{
             });
 
             // Also inform their history
             const body2 = {     
                 userId: authState.id,
             };
-            axios.post(`https://localhost:33123/history/bid/${itemObject.id}`, body2, head).then((reshi)=>{
+            axios.post(`http://localhost:33123/history/bid/${itemObject.id}`, body2, head).then((reshi)=>{
             });
 
 
@@ -230,7 +230,7 @@ function Item() {
                 userId: itemObject.UserId
             }
         }
-        axios.delete(`https://localhost:33123/items/${itemObject.id}`, head).then((res)=>{
+        axios.delete(`http://localhost:33123/items/${itemObject.id}`, head).then((res)=>{
         });
         navigate(`/`);
     };
@@ -299,7 +299,7 @@ function Item() {
                         }
             } 
 
-            axios.put(`https://localhost:33123/items/category/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/category/${itemObject.id}`, body, head).then((res)=>{
             });
 
             window.location.reload();
@@ -339,7 +339,7 @@ function Item() {
                                     userId: itemObject.UserId
                                 }
                     } 
-                    axios.put(`https://localhost:33123/items/location/${itemObject.id}`, body, head).then((res)=>{
+                    axios.put(`http://localhost:33123/items/location/${itemObject.id}`, body, head).then((res)=>{
                     });
 
                     // this so the changes are shown in the ui as well
@@ -375,7 +375,7 @@ function Item() {
                         }
             } 
 
-            axios.put(`https://localhost:33123/items/coordinates/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/coordinates/${itemObject.id}`, body, head).then((res)=>{
             });
 
             window.location.reload();
@@ -408,7 +408,7 @@ function Item() {
                 userId: itemObject.UserId
             }} 
             
-            axios.put(`https://localhost:33123/items/name/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/name/${itemObject.id}`, body, head).then((res)=>{
             });
 
             // this so the changes are shown in the ui as well
@@ -443,7 +443,7 @@ function Item() {
                         }
             } 
 
-            axios.put(`https://localhost:33123/items/description/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/description/${itemObject.id}`, body, head).then((res)=>{
             });
 
             // this so the changes are shown in the ui as well
@@ -478,7 +478,7 @@ function Item() {
                 }
             } 
 
-            axios.put(`https://localhost:33123/items/country/${itemObject.id}`, body, head).then((res)=>{
+            axios.put(`http://localhost:33123/items/country/${itemObject.id}`, body, head).then((res)=>{
             });
 
             // this so the changes are shown in the ui as well
@@ -525,7 +525,7 @@ function Item() {
                                 }
                     } 
 
-                    axios.put(`https://localhost:33123/items/started/${itemObject.id}`, body, head).then((res)=>{
+                    axios.put(`http://localhost:33123/items/started/${itemObject.id}`, body, head).then((res)=>{
                     });
 
                     // this so the changes are shown in the ui as well
@@ -574,7 +574,7 @@ function Item() {
                                 }
                     } 
                     // console.log(body);
-                    axios.put(`https://localhost:33123/items/ends/${itemObject.id}`, body, head).then((res)=>{
+                    axios.put(`http://localhost:33123/items/ends/${itemObject.id}`, body, head).then((res)=>{
                     });
 
                     // this so the changes are shown in the ui as well
@@ -618,7 +618,7 @@ function Item() {
                             }
                 } 
                 // console.log(body);
-                axios.put(`https://localhost:33123/items/buyprice/${itemObject.id}`, body, head).then((res)=>{
+                axios.put(`http://localhost:33123/items/buyprice/${itemObject.id}`, body, head).then((res)=>{
                 });
 
                 // this so the changes are shown in the ui as well
@@ -664,7 +664,7 @@ function Item() {
                                   }
                       } 
                       // console.log(body);
-                      axios.put(`https://localhost:33123/items/currently/${itemObject.id}`, body, head).then((res)=>{
+                      axios.put(`http://localhost:33123/items/currently/${itemObject.id}`, body, head).then((res)=>{
                       });
   
                       // this so the changes are shown in the ui as well
@@ -694,7 +694,7 @@ function Item() {
         window.scrollTo(0, 0);
 
         // First get the item information
-        axios.get(`https://localhost:33123/items/fetchy/${id}`).then((res)=>{
+        axios.get(`http://localhost:33123/items/fetchy/${id}`).then((res)=>{
 
             setItemObject(res.data);
 
@@ -703,18 +703,18 @@ function Item() {
             }
 
             // Get the item's photos if they exist
-            axios.get(`https://localhost:33123/photos/${id}`).then((resimag)=>{
+            axios.get(`http://localhost:33123/photos/${id}`).then((resimag)=>{
                 setImages(resimag.data);
             });
 
             // Then get the categories recursively and return them from parent to children
-            axios.get(`https://localhost:33123/categories/${res.data.furthermostCategoryId}`).then((rescateg)=>{
+            axios.get(`http://localhost:33123/categories/${res.data.furthermostCategoryId}`).then((rescateg)=>{
                 setCategories(rescateg.data);
             });
             
             // Then get the seller information required
             if (res.data.UserId){
-                axios.get(`https://localhost:33123/auth/fetchy/${res.data.UserId}`).then((respo)=>{
+                axios.get(`http://localhost:33123/auth/fetchy/${res.data.UserId}`).then((respo)=>{
                     setSellerObject(respo.data);
                 });
             }
@@ -722,7 +722,7 @@ function Item() {
             // For the seller also get the bids information
             if (res.data.UserId===authState.id){
             
-                axios.get(`https://localhost:33123/bids/${id}`).then((response)=>{
+                axios.get(`http://localhost:33123/bids/${id}`).then((response)=>{
             
                     setAllBids(response.data);
                     console.log(response.data);
@@ -745,7 +745,7 @@ function Item() {
                         }
                     }
                     
-                    axios.post(`https://localhost:33123/history/click/${id}`, body, head).then((respirespi)=>{
+                    axios.post(`http://localhost:33123/history/click/${id}`, body, head).then((respirespi)=>{
                     });
                 
                 }
@@ -1555,3 +1555,4 @@ function Item() {
 }
 
 export default Item;
+

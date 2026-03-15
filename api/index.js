@@ -14,7 +14,7 @@ const session = require("express-session");
 // then express and cors
 app.use(express.json());
 app.use(cors({
-    origin: ["https://localhost:3000"],
+    origin: ["http://localhost:3000"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
@@ -51,12 +51,6 @@ const photographyRouter = require('./routes/Photos');
 app.use("/photos", photographyRouter);
 app.use('/images/', express.static('images'));
 
-// Create the ssl server
-const sslServer = https.createServer({
-    key: fs.readFileSync('/Users/yourname/key.pem'),
-    cert: fs.readFileSync('/Users/yourname/cert.pem')
-}, app);
-
 // listen on port 33123 creating the tables in models in the process
 db.sequelize.sync({ force: false, alter:true}).then(()=>{
     console.log("Encrypted server up and running\nConnected to database");
@@ -82,7 +76,7 @@ db.sequelize.sync({ force: false, alter:true}).then(()=>{
         console.log("Already set up");
     });
 
-    sslServer.listen(33123, ()=>{
+    app.listen(33123, ()=>{
         console.log("Listening on port: 33123");
     });
 });

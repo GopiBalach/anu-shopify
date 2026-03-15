@@ -40,14 +40,14 @@ export default function CategoriesSelect(props) {
             backgroundColor: '#00C9FF',
             color: 'white',
           },
-          bgcolor: (theme) =>
-          theme.palette.mode === 'dark' ? '#101010' : 'grey.50',
+          bgcolor: 'rgba(255, 255, 255, 0.05)',
           border: '1px solid',
-          borderColor: (theme) =>
-          theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
-          borderRadius: 2,
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          borderRadius: 4,
           textAlign: 'center',
-          fontFamily: 'Futura',
+          fontFamily: 'Inter, Futura, sans-serif',
+          fontWeight: 'bold',
+          backdropFilter: 'blur(10px)',
           }}
           onClick={handleOpen}>Select Categories</Button>
     </Box>

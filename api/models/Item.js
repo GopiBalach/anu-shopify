@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         coverPhoto: {
             type: DataTypes.STRING(255),
-            defaultValue: "https://localhost:33123/images/placeholder.png",
+            defaultValue: "http://localhost:33123/images/placeholder.png",
         }
 
     });

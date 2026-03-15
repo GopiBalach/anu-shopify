@@ -131,7 +131,7 @@ export default function MessageChat(props) {
           }
       }
 
-      axios.post(`https://localhost:33123/mail/message/${sender}`, body, head).then((res)=>{
+      axios.post(`http://localhost:33123/mail/message/${sender}`, body, head).then((res)=>{
 
           if (res.data.error){
               alert(res.data.error);
@@ -303,3 +303,4 @@ export default function MessageChat(props) {
     </div>
   );
 }
+

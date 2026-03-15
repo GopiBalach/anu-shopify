@@ -26,7 +26,7 @@ function Dashboard() {
 
     useEffect(()=>{
 
-            axios.get(`https://localhost:33123/auth/fetchyall/${id}`).then((response)=>{
+            axios.get(`http://localhost:33123/auth/fetchyall/${id}`).then((response)=>{
                 if(response.data.message){
                       console.log(response.data.message);
                       navigate('/');
@@ -36,14 +36,14 @@ function Dashboard() {
                     setUserInfo(response.data);
 
                     // check if they have mail
-                    axios.get(`https://localhost:33123/mail/newmail/${id}`).then((respi)=>{
+                    axios.get(`http://localhost:33123/mail/newmail/${id}`).then((respi)=>{
 
                         if(respi.data.gotmail===true){
                             setGotMail(true);
                          }
                     }).catch((error) => {});
 
-                    axios.get(`https://localhost:33123/items/fetchByUser/${id}`).then((res)=>{
+                    axios.get(`http://localhost:33123/items/fetchByUser/${id}`).then((res)=>{
                         
                         const available = res.data.filter((value)=>{
                             return (value.state==='EXPECTED' || value.state==='AVAILABLE' );
@@ -59,7 +59,7 @@ function Dashboard() {
                             navigate('/');
                     });
 
-                    axios.get(`https://localhost:33123/items/mywatchlist/${id}`).then((resbidy)=>{
+                    axios.get(`http://localhost:33123/items/mywatchlist/${id}`).then((resbidy)=>{
                         setMyWatchlist(resbidy.data);
                     }).catch((error) => {
                         navigate('/');
@@ -249,3 +249,4 @@ function Dashboard() {
 }
 
 export default Dashboard
+

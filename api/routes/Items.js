@@ -4,7 +4,6 @@ const { Item, Bid, Mail , Message, User, Contact, Category, UserData, UserTop } 
 const {validateTheToken} = require('../middlewares/Authent');
 const { Op } = require("sequelize");
 const fs = require('fs');
-const js2xml = require('js2xml').Js2Xml;
 const xml2js = require('xml2js');
 
 router.get('/', async (req, res) => {

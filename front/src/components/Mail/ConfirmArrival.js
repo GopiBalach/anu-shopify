@@ -65,7 +65,7 @@ export default function ConfirmArrival(props) {
         }
     }
 
-    axios.post(`https://localhost:33123/mail/confirmarrival/${props.mail.id}`, body, head).then((res)=>{
+    axios.post(`http://localhost:33123/mail/confirmarrival/${props.mail.id}`, body, head).then((res)=>{
     });
 
     setValueC(2.5);
@@ -126,3 +126,4 @@ export default function ConfirmArrival(props) {
     </div>
   );
 }
+

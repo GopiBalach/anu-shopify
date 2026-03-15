@@ -16,7 +16,7 @@ export default function Categories(props) {
 
     useEffect(()=>{
 
-      axios.get("https://localhost:33123/categories").then((res)=>{
+      axios.get("http://localhost:33123/categories").then((res)=>{
           setCategories(res.data);
 
           // Ιnitialise the selection for categories
@@ -83,3 +83,4 @@ export default function Categories(props) {
     </div>
   );
 }
+

@@ -37,7 +37,7 @@ export default function MailOutbox() {
         }
       }
 
-      axios.get(`https://localhost:33123/mail/outbox/${authState.id}`, head).then((res)=>{
+      axios.get(`http://localhost:33123/mail/outbox/${authState.id}`, head).then((res)=>{
         setMailList(res.data.slice(0).reverse());
       });
 
@@ -54,7 +54,7 @@ export default function MailOutbox() {
   };
 
   const displayMessage = (name) =>{
-      axios.get(`https://localhost:33123/auth/fetchy/${name.senderId}`).then((respo)=>{
+      axios.get(`http://localhost:33123/auth/fetchy/${name.senderId}`).then((respo)=>{
               name.name = respo.data.name;
               name.surname = respo.data.surname;
 
@@ -65,7 +65,7 @@ export default function MailOutbox() {
 
   const deleteMessage = (name) =>{
 
-        axios.put(`https://localhost:33123/mail/message/deleteoutbox/${name.id}`).then((res)=>{
+        axios.put(`http://localhost:33123/mail/message/deleteoutbox/${name.id}`).then((res)=>{
         });
         let mails = [...mailList];
 
@@ -191,3 +191,4 @@ export default function MailOutbox() {
     </Grid>
   );
 }
+

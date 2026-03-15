@@ -43,7 +43,7 @@ function ChooseCover(props) {
         }
     }
 
-    axios.put(`https://localhost:33123/photos/setcover/${props.images[selectedImage].id}`, body, head).then((resimag)=>{
+    axios.put(`http://localhost:33123/photos/setcover/${props.images[selectedImage].id}`, body, head).then((resimag)=>{
     });
     setOpen(false);
   }
@@ -79,3 +79,4 @@ function ChooseCover(props) {
 }
 
 export default ChooseCover
+

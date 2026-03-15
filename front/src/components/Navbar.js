@@ -14,7 +14,7 @@ function Navbar(props) {
 
   useEffect(()=>{
 
-    axios.get(`https://localhost:33123/mail/newmailcount/${authState.id}`).then((respi)=>{
+    axios.get(`http://localhost:33123/mail/newmailcount/${authState.id}`).then((respi)=>{
 
       if(respi.data.count===0){
             setGotMail(0);
@@ -38,24 +38,24 @@ function Navbar(props) {
         {!authState.status ? (<> 
           
           {props.clicked==="home" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/">Home</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/">Home</Link>
               :
-              <Link style={{ color: 'white' }} to="/">Home</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/">Home</Link>
             }
           {props.clicked==="login" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/login">Login/Register</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/login">Login/Register</Link>
               :
-              <Link style={{ color: 'white' }} to="/login">Login/Register</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/login">Login/Register</Link>
             }
           {props.clicked==="auctions" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/auctions">Auctions</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/auctions">Auctions</Link>
               :
-              <Link style={{ color: 'white' }} to="/auctions">Auctions</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/auctions">Auctions</Link>
             }
           {props.clicked==="search" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
               :
-              <Link style={{ color: 'white' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
             }
         </>)
         :
@@ -66,7 +66,7 @@ function Navbar(props) {
       
             {props.clicked==="mail" ?
               <div style={{ marginTop:6 }}>
-                <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/mail"><MailIcon color="white" /></Link>  
+                <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/mail"><MailIcon style={{ color: 'rgba(255, 255, 255, 0.5)' }} /></Link>  
               </div>
               :
               <>
@@ -86,47 +86,47 @@ function Navbar(props) {
             
 
             {props.clicked==="home" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/">Home</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/">Home</Link>
               :
-              <Link style={{ color: 'white' }} to="/">Home</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/">Home</Link>
             }
 
             {props.clicked==="createitem" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/createitem">Create</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/createitem">Create</Link>
               :
-              <Link style={{ color: 'white' }} to="/createitem">Create</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/createitem">Create</Link>
             }
 
           </>)
           :
           (<> 
             {props.clicked==="users" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/users">Users</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/users">Users</Link>
               :
-              <Link style={{ color: 'white' }} to="/users">Users</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/users">Users</Link>
             }
             {props.clicked==="addcategory" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/addcategory">Categories</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/addcategory">Categories</Link>
               :
-              <Link style={{ color: 'white' }} to="/addcategory">Categories</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/addcategory">Categories</Link>
             }
             {props.clicked==="export" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/export">Export</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/export">Export</Link>
               :
-              <Link style={{ color: 'white' }} to="/export">Export</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/export">Export</Link>
             }
             </>)
           }
           
           {props.clicked==="auctions" ?
-              <Link style={{ color:'rgba(0, 0, 0, 0.36)' }} to="/auctions">Auctions</Link>
+              <Link style={{ color:'rgba(255, 255, 255, 0.5)' }} to="/auctions">Auctions</Link>
               :
-              <Link style={{ color: 'white' }} to="/auctions">Auctions</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/auctions">Auctions</Link>
             }
           {props.clicked==="search" ?
-              <Link style={{ color: 'rgba(0, 0, 0, 0.36)' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
+              <Link style={{ color: 'rgba(255, 255, 255, 0.5)' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
               :
-              <Link style={{ color: 'white' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
+              <Link style={{ color: 'white', fontWeight: 'bold' }} to="/search">Search&nbsp;&nbsp;&nbsp;</Link>
             }
           <div className ="loggedInContainer"> 
               
@@ -142,3 +142,4 @@ function Navbar(props) {
 }
 
 export default Navbar
+

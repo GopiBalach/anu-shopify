@@ -118,7 +118,7 @@ export default function MailMessage() {
               accessToken: localStorage.getItem("accessToken")
           }
       }
-      axios.post(`https://localhost:33123/mail/message/${authState.id}`, body, head).then((res)=>{
+      axios.post(`http://localhost:33123/mail/message/${authState.id}`, body, head).then((res)=>{
           if (res.data.error){
             setErrorMessage(res.data.error);
             handleClickAlertError();
@@ -142,7 +142,7 @@ export default function MailMessage() {
       }
     }
 
-    axios.get(`https://localhost:33123/mail/auctions/${authState.id}`, head).then((res)=>{
+    axios.get(`http://localhost:33123/mail/auctions/${authState.id}`, head).then((res)=>{
       console.log(res.data);
       setAuctions(res.data);
       
@@ -165,7 +165,7 @@ useEffect(()=>{
     }
   }
 
-  axios.get(`https://localhost:33123/mail/contacts/${authState.id}`, head).then((res)=>{
+  axios.get(`http://localhost:33123/mail/contacts/${authState.id}`, head).then((res)=>{
     console.log(res.data);
     setMails(res.data);
 
@@ -287,3 +287,4 @@ useEffect(()=>{
     </>
   );
 }
+
