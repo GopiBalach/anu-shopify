@@ -19,7 +19,8 @@ import Export from './pages/Export';
 import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Auctions from './components/Searching/Auctions';
-
+import Cart from './pages/Cart';
+import FloatingCart from './components/Cart/FloatingCart';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
     <div className="App" >
       <AuthContext.Provider value={{authState, setAuthState}} >
         <Router>
+          {authState.status && <FloatingCart />}
           <Routes>
 
             {/* Is the User Authenticated */}
@@ -90,6 +92,7 @@ function App() {
             }
 
             <Route path="/auctions" element={<><Navbar clicked={"auctions"}/> <Auctions /></>} />
+            <Route path="/cart" element={<><Navbar clicked={"cart"} /> <Cart /></>} />
             <Route path="/search" element={<><Navbar clicked={"search"} /> <FilterCategories /></>} />
             <Route path="/item/:id" element={<><Navbar clicked={"auctions"}/> <Item /></>} />
             <Route path="/filter" element={<><Navbar clicked={"search"} /> <Filter /></>} />

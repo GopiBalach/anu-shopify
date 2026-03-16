@@ -143,11 +143,11 @@ function LoginForm() {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h5" component="h2">
+            <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ color: 'black' }}>
                 Your Application is Pending Approval
             </Typography>
             <img alt="Approval" className='approval_photo' src='https://codenex.in/wp-content/uploads/2019/01/appdevelopment.png' />
-            <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2 }}>
+            <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2, color: 'black' }}>
                 You will be able to sign in and use our services, as soon as your profile has been seen and approved by the administrator!
             </Typography>
             </Box>
@@ -162,7 +162,7 @@ function LoginForm() {
         >
             <Box sx={style2}>
                 <div className='container'>
-            <Typography id="modal-modal-title" variant="h5" component="h2">
+            <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ color: 'black' }}>
                 {errorMessage}
             </Typography>
             <button className='buttonito' onClick={handleCloseAlert}>Close</button>

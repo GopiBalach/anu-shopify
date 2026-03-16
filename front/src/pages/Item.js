@@ -215,6 +215,25 @@ function Item() {
         
     };
 
+    const addToCart = () => {
+        if (Math.floor((Date.parse(itemObject.ends)-Date.parse(today)))<=0){
+            alert("Auction unfortunately expired! Item is unavailable!")
+            navigate(`/`);
+        } else {
+            const currentCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+            // Check if item already exists
+            const exists = currentCart.find(item => item.id === itemObject.id);
+            if (!exists) {
+                currentCart.push(itemObject);
+                localStorage.setItem('cartItems', JSON.stringify(currentCart));
+                alert("Item added to cart!");
+                window.dispatchEvent(new CustomEvent('cartUpdated'));
+            } else {
+                alert("Item is already in your cart.");
+            }
+        }
+    };
+
     // For Delete Modal
     const [openedDelete, setOpenedDelete] = useState(false);
     const handleCloseDelete = () => {
@@ -1036,11 +1055,16 @@ function Item() {
                                         <SellIcon />&nbsp;Price: {itemObject.buy_price}$ </div> } />
                                     </div>
 
-                                <button className='buttonito' type="submit" onClick={handleOpenPurchase} >
-                                    Purchase
-                                </button>
+                                    <div style={{ display: 'flex', gap: '10px' }}>
+                                        <button className='buttonito' type="button" onClick={addToCart} >
+                                            Add to Cart
+                                        </button>
+                                        <button className='buttonito' type="submit" onClick={handleOpenPurchase} >
+                                            Purchase
+                                        </button>
+                                    </div>
                                 </div>
-                                <HeaderNormal text="By clicking on Purchase you can buy the item instantly" />
+                                <HeaderNormal text="By clicking on Purchase you can buy the item instantly or add to your cart for later" />
                                 </>
                             }
                                 <>

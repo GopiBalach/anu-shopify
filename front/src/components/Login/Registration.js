@@ -46,6 +46,7 @@ function Registration() {
         location: "",
         country: "Greece",
         taxnumber: "",
+        confirmPassword: "",
     };
 
     // REGEX for the telephone validation
@@ -119,10 +120,10 @@ function Registration() {
         }
 
         axios.post("http://localhost:33123/auth/", holdData).then((res)=>{
+            setOpen(true);
+        }).catch((err) => {
+            alert(err.response?.data?.details || err.response?.data?.error || "Registration failed. Please check your information and try again.");
         });
-
-        setOpen(true);
-        
     };
 
     return (
@@ -236,7 +237,7 @@ function Registration() {
             <DialogContentText id="alert-dialog-description">
                 <CreateCoordinates setCoordinates={setCoordinates} />
                 { (Object.keys(coordinates).length > 0 ) &&
-                    <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2 }}>
+                    <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2, color: 'black' }}>
                     Set to:&nbsp;&nbsp;{ConvertDMS(coordinates.lat, coordinates.lng)}
                   </Typography>
                 }
@@ -257,11 +258,11 @@ function Registration() {
             aria-describedby="modal-modal-description"
         >
             <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h5" component="h2">
+                <Typography id="modal-modal-title" variant="h5" component="h2" sx={{ color: 'black' }}>
                     Application Received
                 </Typography>
                 <img alt="Received" className='approval_photo' src='https://codenex.in/wp-content/uploads/2019/01/appdevelopment.png' />
-                <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2 }}>
+                <Typography variant="h6" id="modal-modal-description" sx={{ mt: 2, color: 'black' }}>
                     You'll be able to use our services as soon as you have been approved!
                 </Typography>
             </Box>

@@ -35,7 +35,7 @@ function FilterCategories() {
     const [superMax, setSuperMax] = useState(100);
     const [priceRange, setPriceRange] = React.useState([0, superMax]);
     const [location, setLocation] = React.useState("");
-    const [country, setCountry] = React.useState([]);
+    const [country, setCountry] = React.useState("");
 
     const [selectedFilters, setSelectedFilters] = React.useState([]);
 
@@ -46,7 +46,7 @@ function FilterCategories() {
     useEffect(()=>{
         
         // if no category selected bring everything
-        if (Object.keys(selectedCategory).length <=0 ){
+        if (!selectedCategory || Object.keys(selectedCategory).length <=0 ){
             axios.get(`http://localhost:33123/items`).then((res)=>{
                 for (var i=0;i< res.data.length ; i++){
                     if(res.data[i].currently>superMax){
@@ -90,7 +90,7 @@ function FilterCategories() {
             return ( value.location===location );
           });
         }
-        if (Object.keys(country).length >0){
+        if (country !== ""){
           newFilteredData = newFilteredData.filter((value)=>{
             return ( value.country===country );
           });
@@ -151,16 +151,42 @@ function FilterCategories() {
     const visitedPages = pageNumber * itemsPerPage;
     const pageCount = Math.ceil(finalList.length / itemsPerPage);
 
+    const addToCart = (e, item) => {
+        e.stopPropagation();
+        if (item.state !== "AVAILABLE") {
+            alert("This item is no longer available.");
+            return;
+        }
+        if (!localStorage.getItem('accessToken')) {
+            alert("Please log in to add items to your cart.");
+            navigate('/login');
+            return;
+        }
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const exists = cartItems.find(cartItem => cartItem.id === item.id);
+        if (exists) {
+            alert("This item is already in your cart.");
+        } else {
+            cartItems.push(item);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            alert("Item added to cart successfully!");
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+        }
+    };
+
     // Displaying the items of this particular page
     const displayItems = finalList.slice( visitedPages, visitedPages + itemsPerPage ).map((value, key)=>{
-      return <div className='item' onClick={()=>{navigate(`/item/${value.id}`)}}> 
+      return <div className='item' key={key} onClick={()=>{navigate(`/item/${value.id}`)}} style={{ display: 'flex', flexDirection: 'column' }}> 
               <div className='name'>{value.name} </div>
               <div className='body'>
                   <img className='lando_image' alt="cover" src={value.coverPhoto} />
               </div>
-              <div className='footer gradient-custom'>
-                  <div > {value.location}, {value.country}</div> 
-                  <div style={{ color: '#14b6e3' }}> {value.currently} € &nbsp;&nbsp;</div>
+              <div className='footer gradient-custom' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                      <div> {value.location}, {value.country}</div> 
+                      <div style={{ color: '#14b6e3', fontWeight: 'bold' }}> {value.currently} €</div>
+                  </div>
+                  <button onClick={(e) => addToCart(e, value)} style={{ width: '100%', padding: '5px', borderRadius: '5px', border: 'none', backgroundColor: '#00C9FF', color: 'white', fontWeight: 'bold', cursor: 'pointer', marginTop: '5px' }}>Add to Cart</button>
               </div>
               </div>
     });
@@ -211,7 +237,7 @@ function FilterCategories() {
           { Object.keys(selectedFilters).length > 0 && location!=="" &&
               <Header text={location} />
           }
-          { Object.keys(selectedFilters).length > 0 && Object.keys(country).length > 0 &&
+          { Object.keys(selectedFilters).length > 0 && country !== "" &&
             <Header text={country} />
           }
 

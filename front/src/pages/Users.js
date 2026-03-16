@@ -199,7 +199,7 @@ function Users() {
 
         <Box sx={style}>
           <div className='headerito'>
-            <headerito>Users Awaiting Confirmation</headerito>
+            <header>Users Awaiting Confirmation</header>
           </div>
           <div style={{ height: 369, width: 1100 }}>
             <DataGrid 

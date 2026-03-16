@@ -5,7 +5,7 @@ const cors = require('cors');
 const https =require('https');
 const fs = require('fs');
 const db = require('./models');
-const { User, Category } = require('./models');
+const { User, Category, Item } = require('./models');
 const bcrypt = require('bcrypt');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -70,8 +70,73 @@ db.sequelize.sync({ force: false, alter:true}).then(()=>{
     });
 
     // Creating the basic "parent" category of the app
-    Category.create({
-        name: "All Categories",
+    Category.findOrCreate({ where: { name: "All Categories" } }).then(([parentCat]) => {
+        
+        // Seed some sample categories
+        Category.findOrCreate({ where: { name: "Electronics", CategoryId: parentCat.id } }).then(([elecCat]) => {
+            Category.findOrCreate({ where: { name: "Fashion", CategoryId: parentCat.id } }).then(([fashCat]) => {
+
+                // Create a sample seller
+                bcrypt.hash("1234", 10).then((sellerHash) => {
+                    User.findOrCreate({
+                        where: { username: "seller" },
+                        defaults: {
+                            password: sellerHash,
+                            name: "Sample",
+                            surname: "Seller",
+                            email: "seller@test.com",
+                            telephone: "1234567890",
+                            location: "Athens",
+                            country: "Greece",
+                            taxnumber: 123456789,
+                            approved: true,
+                            admin: false
+                        }
+                    }).then(([sellerUser, created]) => {
+                        Item.count().then(count => {
+                            if (count === 0) {
+                                // Seed some items
+                                const now = new Date();
+                                const ends = new Date(now.getTime() + (7 * 24 * 60 * 60 * 1000)); // 1 week later
+                                
+                                Item.create({
+                                    name: "iPhone 13 Pro",
+                                    description: "Excellent condition, 256GB.",
+                                    buy_price: 600,
+                                    first_bid: 300,
+                                    currently: 300,
+                                    location: "Athens",
+                                    country: "Greece",
+                                    started: now,
+                                    ends: ends,
+                                    state: "AVAILABLE",
+                                    UserId: sellerUser.id,
+                                    furthermostCategoryId: elecCat.id,
+                                    number_of_bids: 0
+                                }).catch(err => console.error("Error creating iPhone seed:", err));
+
+                                Item.create({
+                                    name: "Vintage Leather Jacket",
+                                    description: "Real leather, medium size. Very lightly worn.",
+                                    buy_price: 150,
+                                    first_bid: 50,
+                                    currently: 50,
+                                    location: "Athens",
+                                    country: "Greece",
+                                    started: now,
+                                    ends: ends,
+                                    state: "AVAILABLE",
+                                    UserId: sellerUser.id,
+                                    furthermostCategoryId: fashCat.id,
+                                    number_of_bids: 0
+                                }).catch(err => console.error("Error creating Leather Jacket seed:", err));
+                            }
+                        });
+                    });
+                });
+            });
+        });
+
     }).catch(err => {
         console.log("Already set up");
     });

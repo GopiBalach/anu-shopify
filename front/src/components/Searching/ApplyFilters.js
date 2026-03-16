@@ -24,7 +24,7 @@ const style = {
 export default function ApplyFilters(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
-    setCountry([]);
+    setCountry("");
     setLocation("");
     setInterPriceRange([0, props.max]);
     setOpen(true);
@@ -32,7 +32,7 @@ export default function ApplyFilters(props) {
   const handleClose = () => setOpen(false);
 
 
-  const [mycountry, setCountry] = React.useState([]);
+  const [mycountry, setCountry] = React.useState("");
 
   const [location, setLocation] = React.useState("");
 

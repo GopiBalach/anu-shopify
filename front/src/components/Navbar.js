@@ -4,6 +4,7 @@ import {AuthContext } from './AuthContext'
 import Logout from './Login/Logout';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import axios from 'axios';
 
 // The navigatior bar
@@ -11,8 +12,19 @@ function Navbar(props) {
   
   const {authState} = useContext(AuthContext);
   const [gotMail, setGotMail] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+
+  const loadCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartCount(cart.length);
+  };
 
   useEffect(()=>{
+    // Initial load
+    loadCartCount();
+
+    // Listen for custom event
+    window.addEventListener('cartUpdated', loadCartCount);
 
     axios.get(`http://localhost:33123/mail/newmailcount/${authState.id}`).then((respi)=>{
 
@@ -28,7 +40,11 @@ function Navbar(props) {
         }).catch((error) => {
       });
 
-  });
+    return () => {
+      window.removeEventListener('cartUpdated', loadCartCount);
+    };
+
+  }, [authState.id]);
 
   return (
     <div>
@@ -77,8 +93,20 @@ function Navbar(props) {
                 </Badge>
                 </Link>  
                 :
-                <div style={{ marginTop:6 }}>
+                <div style={{ marginTop:6, marginRight: 15 }}>
                 <Link style={{ color: 'white' }} to="/mail"><MailIcon color="white" /></Link>  
+                </div>
+              }
+
+              { (cartCount!==0) ?
+                <Link style={{ color: 'white', marginRight: 15 }} to="/cart"> 
+                <Badge badgeContent={cartCount} color="info">
+                <ShoppingCartIcon color="white" />
+                </Badge>
+                </Link>  
+                :
+                <div style={{ marginTop:6 }}>
+                <Link style={{ color: 'white', marginRight: 15 }} to="/cart"><ShoppingCartIcon color="white" /></Link>  
                 </div>
               }
               </>

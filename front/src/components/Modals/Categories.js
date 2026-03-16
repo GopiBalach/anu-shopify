@@ -20,7 +20,9 @@ export default function Categories(props) {
           setCategories(res.data);
 
           // Ιnitialise the selection for categories
-          props.setSelectedCategory(res.data[0]);
+          if (res.data && res.data.length > 0) {
+              props.setSelectedCategory(res.data[0]);
+          }
       });
     
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -29,8 +29,12 @@ router.post('/', async (req, res) => {
             // this here just for safety
             admin: false,
             approved: false,
+        }).then(() => {
+            res.json('Successful');
+        }).catch(err => {
+            console.error("User.create error:", err);
+            res.status(500).json({error: "Failed to create user", details: err.message});
         });
-        res.json('Successful');
     });
 
 });

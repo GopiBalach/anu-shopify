@@ -64,16 +64,42 @@ function Auctions() {
     const visitedPages = pageNumber * itemsPerPage;
     const pageCount = Math.ceil(itemList.length / itemsPerPage);
 
+    const addToCart = (e, item) => {
+        e.stopPropagation();
+        if (item.state !== "AVAILABLE") {
+            alert("This item is no longer available.");
+            return;
+        }
+        if (!localStorage.getItem('accessToken')) {
+            alert("Please log in to add items to your cart.");
+            navigate('/login');
+            return;
+        }
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const exists = cartItems.find(cartItem => cartItem.id === item.id);
+        if (exists) {
+            alert("This item is already in your cart.");
+        } else {
+            cartItems.push(item);
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            alert("Item added to cart successfully!");
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+        }
+    };
+
     // Displaying the items of this particular page
     const displayItems = itemList.slice( visitedPages, visitedPages + itemsPerPage ).map((value, key)=>{
-      return <div className='item' key={key} onClick={()=>{navigate(`/item/${value.id}`)}}> 
+      return <div className='item' key={key} onClick={()=>{navigate(`/item/${value.id}`)}} style={{ display: 'flex', flexDirection: 'column' }}> 
               <div className='name'>{value.name} </div>
               <div className='body'>
                   <img className='lando_image' src={value.coverPhoto} alt="coverphoto" />
               </div>
-              <div className='footer gradient-custom'>
-                  <div > {value.location}, {value.country}</div> 
-                  <div style={{ color: '#14b6e3' }}> {value.currently} € &nbsp;&nbsp;</div>
+              <div className='footer gradient-custom' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                      <div> {value.location}, {value.country}</div> 
+                      <div style={{ color: '#14b6e3', fontWeight: 'bold' }}> {value.currently} €</div>
+                  </div>
+                  <button onClick={(e) => addToCart(e, value)} style={{ width: '100%', padding: '5px', borderRadius: '5px', border: 'none', backgroundColor: '#00C9FF', color: 'white', fontWeight: 'bold', cursor: 'pointer', marginTop: '5px' }}>Add to Cart</button>
               </div>
               </div>
     });
