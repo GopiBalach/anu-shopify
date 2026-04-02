@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../components/AuthContext';
 import Title from '../components/Typography/Title';
-import Header from '../components/Typography/Header';
-import { Typography, Card, CardContent, CardMedia, Button, Grid, Box, Modal, Snackbar, Alert, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
+
+import { Typography, Card, CardContent, CardMedia, Button Box, Modal, Snackbar, Alert, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
 
 const style = {
     position: 'absolute',
