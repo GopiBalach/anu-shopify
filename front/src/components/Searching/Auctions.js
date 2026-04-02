@@ -5,7 +5,7 @@ import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import CategoriesSelect from './CategoriesSelect';
-import Title from '../Typography/Title';
+
 import Header from '../Typography/Header';
 import Detail from '../Typography/Detail';
 
